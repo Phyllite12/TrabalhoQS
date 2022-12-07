@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TrabalhoQS</string>
+    <string name="menu_principal">Menu principal</string>
 </resources>
