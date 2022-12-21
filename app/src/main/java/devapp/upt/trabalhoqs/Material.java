@@ -6,31 +6,31 @@ public class Material
     private String tipo; //Tipo do material
     private String descricao; //Descrição do Material
     private int nUnidades;//Número de unidades existentes
-    private boolean disponibilidade; //Estado de disponibilidade
+    private String disponibilidade; //Estado de disponibilidade
 
-    public Material(int cod, String tipo, String descricao, int nUnidades)
+    public Material(int cod, String tipo, String descricao, int nUnidades, String disponibilidade)
     {
         this.cod = cod;
         this.tipo = tipo;
         this.descricao = descricao;
         this.nUnidades = nUnidades;
-        this.disponibilidade = true;
+        this.disponibilidade = disponibilidade;
+    }
+
+    public Material() {
+        this.cod = 0;
+        this.tipo = "";
+        this.descricao = "";
+        this.nUnidades = 0;
+        this.disponibilidade = "";
     }
 
     public int getCod() {
         return cod;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
-    }
-
     public String getTipo() {
         return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public String getDescricao() {
@@ -49,12 +49,20 @@ public class Material
         this.nUnidades = nUnidades;
     }
 
-    public boolean isDisponibilidade() {
+    public String isDisponibilidade() {
         return disponibilidade;
     }
 
-    public void setDisponibilidade(boolean disponibilidade) {
+    public void setDisponibilidade(String disponibilidade) {
         this.disponibilidade = disponibilidade;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
