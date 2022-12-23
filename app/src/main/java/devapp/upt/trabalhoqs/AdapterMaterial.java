@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
 
-    ArrayList<String> material;
+    ArrayList<Material> material;
     View_HolderMaterial myVMat;
 
     public AdapterMaterial(ArrayList<Material> material) {

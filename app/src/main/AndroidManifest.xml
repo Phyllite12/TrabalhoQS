@@ -13,6 +13,20 @@
         android:theme="@style/Theme.TrabalhoQS"
         tools:targetApi="31">
         <activity
+            android:name=".View_HolderPedidoMaterial"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ListarPedidoMaterial"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ListarMaterial"
             android:exported="false">
             <meta-data
