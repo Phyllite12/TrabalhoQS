@@ -26,6 +26,39 @@
                 android:layout_marginTop="10sp"
                 app:srcCompat="@mipmap/upt_logo" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnMat"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_edittext"
+                    android:text="@string/materiais"
+                    android:onClick="mostrarMat"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCom"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_edittext"
+                    android:text="@string/componentes"
+                    android:onClick="mostrarComp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCons"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_edittext"
+                    android:text="@string/consumiveis"
+                    android:onClick="mostrarCons"/>
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMaterial"
                 android:layout_width="match_parent"
@@ -45,7 +78,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sair"

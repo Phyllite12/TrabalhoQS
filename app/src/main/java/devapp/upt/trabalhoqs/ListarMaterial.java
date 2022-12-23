@@ -43,12 +43,12 @@ public class ListarMaterial extends AppCompatActivity {
         cl.setOnClickListener(this::onClick);
     }
 
-    public void getMaterialBD(){
+    public void getMaterialBD() {
         listarMaterial = dbHandler.getMaterial();
     }
 
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         finish();
     }
+
 }
