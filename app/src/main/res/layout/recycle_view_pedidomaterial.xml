@@ -18,8 +18,28 @@
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="121dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background_btn_vermelho"
+        android:text="@string/recusar"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="46dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        android:layout_width="121dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background_btn_verde"
+        android:text="@string/aceitar"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

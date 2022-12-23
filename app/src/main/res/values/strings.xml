@@ -2,4 +2,12 @@
     <string name="app_name">TrabalhoQS</string>
     <string name="menu_principal">Menu principal</string>
     <string name="sair">Sair</string>
+    <string name="registar_pedido">Registar Pedido</string>
+    <string name="pass">Password</string>
+    <string name="aceitar">Aceitar</string>
+    <string name="recusar">Recusar</string>
+    <string name="tipo_recurso">Tipo de recurso</string>
+    <string name="materiais">Materiais</string>
+    <string name="componentes">Componentes</string>
+    <string name="consumiveis">Consumiveis</string>
 </resources>
