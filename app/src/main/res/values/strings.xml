@@ -10,4 +10,8 @@
     <string name="materiais">Materiais</string>
     <string name="componentes">Componentes</string>
     <string name="consumiveis">Consumiveis</string>
+    <string name="login">Login</string>
+    <string name="numero">Numero</string>
+    <string name="universidade_portucalense">Universidade Portucalense</string>
+    <string name="password">Password</string>
 </resources>
