@@ -24,8 +24,7 @@ public class Login extends AppCompatActivity {
         btn.setOnClickListener(this::login);
     }
 
-    private void login(View view) {
-    }
+
 
 
 }
