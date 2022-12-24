@@ -16,7 +16,8 @@ import devapp.upt.trabalhoqs.R;
 import devapp.upt.trabalhoqs.RequisitarMaterial;
 import devapp.upt.trabalhoqs.ViewHolders.View_HolderMaterial;
 
-public classAdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
+
+public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
 
     ArrayList<Material> materiais;
     View_HolderMaterial myVMat;

@@ -11,46 +11,46 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import devapp.upt.trabalhoqs.Adapters.AdapterMaterial;
-import devapp.upt.trabalhoqs.ClassesObjetos.Material;
+import devapp.upt.trabalhoqs.Adapters.AdapterPedido;
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
 
-public class ListarMaterial extends AppCompatActivity {
+public class ListaPedido extends AppCompatActivity {
 
     DbHandler dbHandler;
     Intent i;
-    AdapterMaterial myadapter;
-    RecyclerView recyclerViewMaterial;
-    ArrayList<Material> listarMaterial;
+    AdapterPedido myadapter;
+    RecyclerView recyclerViewPedido;
+    ArrayList<PedidoAcesso> listarPedido;
     LinearLayoutManager layoutManager;
     ConstraintLayout cl;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_material);
+        setContentView(R.layout.layout_pedidoacesso);
 
         i = getIntent();
         dbHandler = new DbHandler(this);
 
-        getMaterialBD();
+        getPedidoAcessoBD();
 
-        myadapter = new AdapterMaterial(listarMaterial, this);
-        recyclerViewMaterial = findViewById(R.id.recyclerViewMaterial);
-        recyclerViewMaterial.setAdapter(myadapter);
+        myadapter = new AdapterPedido(listarPedido, this);
+        recyclerViewPedido = findViewById(R.id.recyclerViewPedAcess);
+        recyclerViewPedido.setAdapter(myadapter);
 
         layoutManager = new LinearLayoutManager(this);
-        recyclerViewMaterial.setLayoutManager(layoutManager);
+        recyclerViewPedido.setLayoutManager(layoutManager);
 
-        cl = findViewById(R.id.finishBtnListarMaterial);
+        cl = findViewById(R.id.finishBtnListarPedAcess);
         cl.setOnClickListener(this::onClick);
     }
 
-    public void getMaterialBD() {
-        listarMaterial = dbHandler.getMaterial();
+    private void getPedidoAcessoBD() {
+        listarPedido = dbHandler.getPedidosDeAcesso();
     }
 
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         finish();
     }
 
