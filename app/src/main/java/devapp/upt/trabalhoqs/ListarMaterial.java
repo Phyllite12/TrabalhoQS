@@ -11,6 +11,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import devapp.upt.trabalhoqs.Adapters.AdapterMaterial;
+import devapp.upt.trabalhoqs.ClassesObjetos.Material;
+
 public class ListarMaterial extends AppCompatActivity {
 
     DbHandler dbHandler;
@@ -32,7 +35,7 @@ public class ListarMaterial extends AppCompatActivity {
 
         getMaterialBD();
 
-        myadapter = new AdapterMaterial(listarMaterial);
+        myadapter = new AdapterMaterial(listarMaterial, this);
         recyclerViewMaterial = findViewById(R.id.recyclerViewMaterial);
         recyclerViewMaterial.setAdapter(myadapter);
 

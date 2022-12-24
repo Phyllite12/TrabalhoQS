@@ -11,6 +11,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import devapp.upt.trabalhoqs.Adapters.AdapterPedidoMat;
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoMaterial;
+
 public class ListarPedidoMaterial extends AppCompatActivity {
 
     DbHandler dbHandler;

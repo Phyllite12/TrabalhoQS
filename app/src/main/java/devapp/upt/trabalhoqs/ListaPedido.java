@@ -11,6 +11,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import devapp.upt.trabalhoqs.Adapters.AdapterPedido;
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
+
 public class ListaPedido extends AppCompatActivity {
 
     DbHandler dbHandler;
@@ -31,7 +34,7 @@ public class ListaPedido extends AppCompatActivity {
 
         getPedidoAcessoBD();
 
-        myadapter = new AdapterPedido(listarPedido);
+        myadapter = new AdapterPedido(listarPedido, this);
         recyclerViewPedido = findViewById(R.id.recyclerViewPedAcess);
         recyclerViewPedido.setAdapter(myadapter);
 

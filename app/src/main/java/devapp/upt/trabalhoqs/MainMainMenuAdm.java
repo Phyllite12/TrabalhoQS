@@ -22,37 +22,29 @@ public class MainMainMenuAdm extends AppCompatActivity {
         c10 = findViewById(R.id.c10);
         c11 = findViewById(R.id.c11);
         c12 = findViewById(R.id.c12);
-        c13 = findViewById(R.id.c13);
-        c14 = findViewById(R.id.c14);
         c15 = findViewById(R.id.c15);
 
 
-        c10.setOnClickListener(this :: );
-        c11.setOnClickListener(this :: );
-        c12.setOnClickListener(this :: );
-        c13.setOnClickListener(this :: );
-        c14.setOnClickListener(this :: );
+        c10.setOnClickListener(this :: requisicoes);
+        c11.setOnClickListener(this :: pedidosAcesso);
+        c12.setOnClickListener(this :: Materiais);
         c15.setOnClickListener(this :: voltar);
     }
 
     private void requisicoes(View view){
-        i = new Intent(this,ListarRequisicoes.class);
+        i = new Intent(this,ListarPedidoMaterial.class);
         startActivity(i);
         ;
     }
 
-    private void (View view){
-        i = new Intent(this,Listar.class);
+    private void pedidosAcesso(View view){
+        i = new Intent(this,ListaPedido.class);
         startActivity(i);
     }
 
-    private void (View view){
-    }
-
-    private void (View view) {
-    }
-
-    private void (View view){
+    private void Materiais(View view){
+        i = new Intent(this,ListarMaterial.class);
+        startActivity(i);
     }
 
     private void voltar(View view){

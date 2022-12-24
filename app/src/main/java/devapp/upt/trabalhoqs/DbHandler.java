@@ -1,6 +1,5 @@
 package devapp.upt.trabalhoqs;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import devapp.upt.trabalhoqs.ClassesObjetos.Componente;
+import devapp.upt.trabalhoqs.ClassesObjetos.Consumivel;
+import devapp.upt.trabalhoqs.ClassesObjetos.Conta;
+import devapp.upt.trabalhoqs.ClassesObjetos.Material;
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoMaterial;
 
 public class DbHandler extends SQLiteOpenHelper{
 
@@ -34,6 +40,7 @@ public class DbHandler extends SQLiteOpenHelper{
     public static final String CNUM = "CNUM";
     public static final String CPASS = "CPASS";
     public static final String CTIPO = "CTIPO";
+    public static final String CPERM = "CPERM";
 
     //TABLE Consumiveis
     public static final String CONSCOD = "CONSCOD";
@@ -75,7 +82,7 @@ public class DbHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String queryMateriaisTable = String.format("CREATE TABLE %s( %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER, %s TEXT)", DB_MATERIAL, MCOD, MTIPO, MDESCRICAO, MUNIDADES, MDISPONIBILIDADE);
-        String queryContasTable = String.format("CREATE TABLE %s( %s TEXT , %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT)", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO);
+        String queryContasTable = String.format("CREATE TABLE %s( %s TEXT , %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER)", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, CPERM);
         String queryConsumiveisTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_CONSUMIVEIS, CONSCOD, CONSMCOD, CONSDESCRICAO, CONSUNIDADES, CONSDISPONIBILIDADE);
         String queryComponentesTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_COMPONENTS, COMSCOD, COMSMCOD, COMSDESCRICAO, COMSUNIDADES, COMSDISPONIBILIDADE);
         String queryPedidosAcessoTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER, % TEXT)", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM, PACOMENTARIO);
@@ -111,7 +118,7 @@ public class DbHandler extends SQLiteOpenHelper{
 
     public void addContas(Conta conta) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("INSERT INTO %s(%s,%s,%s,%s) VALUES('%s','%s','%s','%s');", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, conta.getNome(), conta.getNum(), conta.getPass(), conta.getTipo());
+        String query = String.format("INSERT INTO %s(%s,%s,%s,%s,%s) VALUES('%s','%s','%s','%s','%s');", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, CPERM, conta.getNome(), conta.getNum(), conta.getPass(), conta.getTipo(), conta.getPerm());
         db.execSQL(query);
     }
 
@@ -164,9 +171,15 @@ public class DbHandler extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
-    public void DeleteMaterial(int cod) {
+    public void DeletePedidoAcesso(int cod) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("DELETE FROM %s WHERE %s = %s", DB_MATERIAL, MCOD, cod);
+        String query = String.format("DELETE FROM %s WHERE %s = %s", DB_PEDIDOS_ACESSO, PACOD, cod);
+        db.execSQL(query);
+    }
+
+    public void DeletePedidoMaterial(int cod) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = String.format("DELETE FROM %s WHERE %s = %s", DB_PEDIDOS_MATERIAL, PMCOD, cod);
         db.execSQL(query);
     }
     //Fim Deletes
@@ -376,6 +389,32 @@ public class DbHandler extends SQLiteOpenHelper{
             } while (cursor.moveToNext());
         }
         return c;
+    }
+
+    public int GetQuantidade(int codMaterial){
+    int m = 0;
+    SQLiteDatabase db = this.getReadableDatabase();
+    String query = String.format("Select %s FROM %s WHERE %s = %s", MUNIDADES, DB_MATERIAL, MCOD, codMaterial);
+    Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+        do {
+            m = (cursor.getInt(3));
+        } while (cursor.moveToNext());
+    }
+        return m;
+    }
+
+    public int GetPerm(int codMaterial){
+        int m = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = String.format("Select %s FROM %s WHERE %s = %s", MUNIDADES, DB_MATERIAL, MCOD, codMaterial);
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                m = (cursor.getInt(3));
+            } while (cursor.moveToNext());
+        }
+        return m;
     }
     //Fim Listagens
 

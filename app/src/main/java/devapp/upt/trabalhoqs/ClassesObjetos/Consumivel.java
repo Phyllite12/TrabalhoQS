@@ -1,4 +1,4 @@
-package devapp.upt.trabalhoqs;
+package devapp.upt.trabalhoqs.ClassesObjetos;
 
 public class Consumivel {
 
