@@ -24,6 +24,6 @@ public class RequisitarMaterial extends AppCompatActivity {
 
         txt = findViewById(R.id.textView3);
         edtQuant = findViewById(R.id.editTextQuantidade);
-        btn = findViewById(R.id.btnRegistoM);
+        btn = findViewById(R.id.Aceitar);
     }
 }

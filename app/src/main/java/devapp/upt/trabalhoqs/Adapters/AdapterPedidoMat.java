@@ -1,4 +1,4 @@
-package devapp.upt.trabalhoqs;
+package devapp.upt.trabalhoqs.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import devapp.upt.trabalhoqs.ClassesObjetos.PedidoMaterial;
+import devapp.upt.trabalhoqs.R;
+import devapp.upt.trabalhoqs.ViewHolders.View_HolderPedidoMaterial;
 
 public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMaterial>  {
 
@@ -31,7 +35,7 @@ public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMate
 
     @Override
     public void onBindViewHolder(@NonNull View_HolderPedidoMaterial holder, int position) {
-        myVPedMat.pedMatTv.setText(pedMaterial.get(position));
+        myVPedMat.pedMatTv.setText(pedMaterial.get(position).getPedidoCod());
     }
 
     @Override

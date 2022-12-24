@@ -1,4 +1,4 @@
-package devapp.upt.trabalhoqs;
+package devapp.upt.trabalhoqs.ClassesObjetos;
 
 public class Conta {
 
@@ -6,12 +6,14 @@ public class Conta {
     private int num;
     private String pass;
     private String tipo;
+    private int perm;
 
-    public Conta(String nome, int num, String pass, String tipo) {
+    public Conta(String nome, int num, String pass, String tipo, int perm) {
         this.nome = nome;
         this.num = num;
         this.pass = pass;
         this.tipo = tipo;
+        this.perm = perm;
     }
 
     public String getNome() {
@@ -44,5 +46,13 @@ public class Conta {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public int getPerm() {
+        return perm;
+    }
+
+    public void setPerm(int perm) {
+        this.perm = perm;
     }
 }

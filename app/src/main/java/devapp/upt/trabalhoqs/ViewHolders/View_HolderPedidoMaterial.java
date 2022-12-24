@@ -1,4 +1,4 @@
-package devapp.upt.trabalhoqs;
+package devapp.upt.trabalhoqs.ViewHolders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import devapp.upt.trabalhoqs.R;
 
 public class View_HolderPedidoMaterial extends RecyclerView.ViewHolder {
 
