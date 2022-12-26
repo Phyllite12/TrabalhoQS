@@ -8,7 +8,7 @@
     tools:context=".Informacao_Pedido">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewInformaçaoPedido"
         android:layout_width="186dp"
         android:layout_height="95dp"
         android:layout_marginTop="112dp"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/Aceitar"
@@ -49,6 +49,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

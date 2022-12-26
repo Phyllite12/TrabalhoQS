@@ -34,7 +34,7 @@ public class ListarPedidoMaterial extends AppCompatActivity {
 
         getPedidoMaterialBD();
 
-        myadapter = new AdapterPedidoMat(listarPedidoMaterial);
+        myadapter = new AdapterPedidoMat(listarPedidoMaterial, this);
         recyclerViewPedidoMat = findViewById(R.id.recyclerViewPedMat);
         recyclerViewPedidoMat.setAdapter(myadapter);
 

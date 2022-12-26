@@ -9,8 +9,6 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import devapp.upt.trabalhoqs.ClassesObjetos.Componente;
-import devapp.upt.trabalhoqs.ClassesObjetos.Consumivel;
 import devapp.upt.trabalhoqs.ClassesObjetos.Conta;
 import devapp.upt.trabalhoqs.ClassesObjetos.Material;
 import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
@@ -60,7 +58,6 @@ public class DbHandler extends SQLiteOpenHelper{
     public static final String PACOD = "PACOD";
     public static final String PANOMEPROF = "PANOMEPROF";
     public static final String PANUM = "PANUM";
-    public static final String PACOMENTARIO = "PACOMENTARIO";
 
     //TABLE PedidosMaterial
     public static final String PMCOD = "PMCOD";
@@ -85,7 +82,7 @@ public class DbHandler extends SQLiteOpenHelper{
         String queryContasTable = String.format("CREATE TABLE %s( %s TEXT , %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER)", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, CPERM);
         String queryConsumiveisTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_CONSUMIVEIS, CONSCOD, CONSMCOD, CONSDESCRICAO, CONSUNIDADES, CONSDISPONIBILIDADE);
         String queryComponentesTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_COMPONENTS, COMSCOD, COMSMCOD, COMSDESCRICAO, COMSUNIDADES, COMSDISPONIBILIDADE);
-        String queryPedidosAcessoTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER, % TEXT)", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM, PACOMENTARIO);
+        String queryPedidosAcessoTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER)", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM);
         String queryPedidosMaterialTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s INTEGER, FOREIGN KEY(%s))", DB_PEDIDOS_MATERIAL, PMCOD, PMCODPRODUTO, PMQUANTIDADE, PMCODPROF);
         sqLiteDatabase.execSQL(queryMateriaisTable);
         sqLiteDatabase.execSQL(queryContasTable);
@@ -122,21 +119,9 @@ public class DbHandler extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
-    public void addConsumiveis(Consumivel consumivel) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("INSERT INTO %s(%s,%s,%s,%s,%s) VALUES('%s','%s','%s','%s','%s');", DB_CONSUMIVEIS, CONSCOD, CONSMCOD, CONSDESCRICAO, CONSUNIDADES, CONSDISPONIBILIDADE, consumivel.getCod(), consumivel.getCodMaterial(), consumivel.getDescricao(), consumivel.getnUnidades(), consumivel.isDisponibilidade());
-        db.execSQL(query);
-    }
-
-    public void addComponentes(Componente componente) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("INSERT INTO %s(%s,%s,%s,%s,%s) VALUES('%s','%s','%s','%s','%s');", DB_COMPONENTS, COMSCOD, COMSMCOD, COMSDESCRICAO, COMSUNIDADES, COMSDISPONIBILIDADE, componente.getCod(), componente.getCodMaterial(), componente.getDescricao(), componente.getnUnidades(), componente.isDisponibilidade());
-        db.execSQL(query);
-    }
-
     public void addPedidosAcesso(PedidoAcesso pedidoAcesso) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("INSERT INTO %s(%s,%s,%s,%s) VALUES('%s','%s','%s','%s');", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM, PACOMENTARIO, pedidoAcesso.getCod(), pedidoAcesso.getNomeProfessor(), pedidoAcesso.getNum(), pedidoAcesso.getComentario());
+        String query = String.format("INSERT INTO %s(%s,%s,%s) VALUES('%s','%s','%s');", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM, pedidoAcesso.getCod(), pedidoAcesso.getNomeProfessor(), pedidoAcesso.getNum());
         db.execSQL(query);
     }
 
@@ -202,11 +187,21 @@ public class DbHandler extends SQLiteOpenHelper{
                 p.setCod(cursor.getInt(0));
                 p.setNomeProfessor(cursor.getString(1));
                 p.setNum(cursor.getInt(2));
-                p.setComentario(cursor.getString(1));
                 pedidoAcessos.add(p);
             } while (cursor.moveToNext());
         }
         return pedidoAcessos;
+    }
+
+    public String getNomeProf(int cod) {
+        String m = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = String.format("Select * FROM %s WHERE %s = %s", DB_ACCOUNTS, CNUM, cod);
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            m = cursor.getString(0);
+        }
+        return m;
     }
 
     public ArrayList<PedidoMaterial> getPedidosDeMaterial() {
@@ -270,136 +265,24 @@ public class DbHandler extends SQLiteOpenHelper{
         String query = String.format("Select * FROM %s WHERE %s = %s", DB_MATERIAL, MCOD, codMaterial);
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
-            do {
                 m.setCod(cursor.getInt(0));
                 m.setTipo(cursor.getString(1));
                 m.setDescricao(cursor.getString(2));
                 m.setnUnidades(cursor.getInt(3));
                 m.setDisponibilidade(cursor.getString(4));
-            } while (cursor.moveToNext());
         }
         return m;
     }
 
-    public ArrayList<Consumivel> getConsumivel() {
-        ArrayList<Consumivel> consumivels = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s", DB_CONSUMIVEIS);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Consumivel c = new Consumivel();
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-                consumivels.add(c);
-            } while (cursor.moveToNext());
-        }
-        return consumivels;
-    }
 
-    public ArrayList<Consumivel> getConsumivelMaterial(int CodMaterial) {
-        ArrayList<Consumivel> consumivels = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s WHERE %s = %s", DB_CONSUMIVEIS, CONSMCOD, CodMaterial);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Consumivel c = new Consumivel();
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-                consumivels.add(c);
-            } while (cursor.moveToNext());
-        }
-        return consumivels;
-    }
-
-    public Consumivel getConsumivel(int CodConsumivel) {
-        Consumivel c = new Consumivel();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s WHERE %s = %s", DB_CONSUMIVEIS, CONSCOD, CodConsumivel);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-            } while (cursor.moveToNext());
-        }
-        return c;
-    }
-
-    public ArrayList<Componente> getComponente() {
-        ArrayList<Componente> componentes = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s", DB_COMPONENTS);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Componente c = new Componente();
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-                componentes.add(c);
-            } while (cursor.moveToNext());
-        }
-        return componentes;
-    }
-
-    public ArrayList<Componente> getComponenteMaterial(int CodMaterial) {
-        ArrayList<Componente> componentes = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s WHERE %s = %s", DB_COMPONENTS, COMSMCOD, CodMaterial);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Componente c = new Componente();
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-                componentes.add(c);
-            } while (cursor.moveToNext());
-        }
-        return componentes;
-    }
-
-    public Componente getComponente(int codComponente) {
-        Componente c = new Componente();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s WHERE %s = %s", DB_COMPONENTS, COMSCOD, codComponente);
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                c.setCod(cursor.getInt(0));
-                c.setCodMaterial(cursor.getInt(1));
-                c.setDescricao(cursor.getString(2));
-                c.setnUnidades(cursor.getInt(3));
-                c.setDisponibilidade(cursor.getString(4));
-            } while (cursor.moveToNext());
-        }
-        return c;
-    }
 
     public int GetQuantidade(int codMaterial){
     int m = 0;
     SQLiteDatabase db = this.getReadableDatabase();
-    String query = String.format("Select %s FROM %s WHERE %s = %s", MUNIDADES, DB_MATERIAL, MCOD, codMaterial);
+    String query = String.format("Select * FROM %s WHERE %s = %s", DB_MATERIAL, MCOD, codMaterial);
     Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
-        do {
             m = (cursor.getInt(3));
-        } while (cursor.moveToNext());
     }
         return m;
     }
@@ -407,12 +290,10 @@ public class DbHandler extends SQLiteOpenHelper{
     public int GetPerm(int codMaterial){
         int m = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select %s FROM %s WHERE %s = %s", MUNIDADES, DB_MATERIAL, MCOD, codMaterial);
+        String query = String.format("Select * FROM %s WHERE %s = %s", DB_MATERIAL, MCOD, codMaterial);
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
-            do {
                 m = (cursor.getInt(3));
-            } while (cursor.moveToNext());
         }
         return m;
     }
@@ -462,4 +343,33 @@ public class DbHandler extends SQLiteOpenHelper{
     }
     //Fim Updates
 
+
+
+    public String authCheck(String nome, String pass) {
+        SQLiteDatabase db = getReadableDatabase();
+        String queryAl = "SELECT * FROM " + DB_ACCOUNTS ;
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(queryAl, null);
+        }
+        if (c.getCount() != 0) {
+            while (c.moveToNext()) {
+                if (nome.equalsIgnoreCase(String.valueOf(c.getInt(1))) && pass.equalsIgnoreCase(String.valueOf(c.getInt(2)))) {
+                    return String.valueOf(c.getInt(2));
+                }
+            }
+        }
+        return "";
+    }
+
+
+
+
+    public int checkContaTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = String.format("SELECT * FROM %s", DB_ACCOUNTS);
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.getCount();
+
+    }
 }

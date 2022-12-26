@@ -23,6 +23,7 @@ public class ListarMaterial extends AppCompatActivity {
     ArrayList<Material> listarMaterial;
     LinearLayoutManager layoutManager;
     ConstraintLayout cl;
+    int cod;
 
 
     @Override
@@ -31,11 +32,12 @@ public class ListarMaterial extends AppCompatActivity {
         setContentView(R.layout.layout_material);
 
         i = getIntent();
+        cod = Integer.parseInt(i.getStringExtra("cod"));
         dbHandler = new DbHandler(this);
 
         getMaterialBD();
 
-        myadapter = new AdapterMaterial(listarMaterial, this);
+        myadapter = new AdapterMaterial(listarMaterial, this, cod);
         recyclerViewMaterial = findViewById(R.id.recyclerViewMaterial);
         recyclerViewMaterial.setAdapter(myadapter);
 

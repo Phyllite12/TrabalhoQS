@@ -13,6 +13,13 @@
         android:theme="@style/Theme.TrabalhoQS"
         tools:targetApi="31">
         <activity
+            android:name=".informacao_PedidoMaterial"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Informacao_Pedido"
             android:exported="false">
             <meta-data
