@@ -50,7 +50,6 @@ public class AdapterPedido extends RecyclerView.Adapter<View_HolderPedido>{
             @Override
             public void onClick(View view) {
                 info = pedidoAcesso.getNomeProfessor() +
-                        "\n" + pedidoAcesso.getComentario() +
                         "\n" + String.valueOf(pedidoAcesso.getCod()) +
                         "\n" + String.valueOf(pedidoAcesso.getNum());
                 cod = String.valueOf(pedidoAcesso.getCod());

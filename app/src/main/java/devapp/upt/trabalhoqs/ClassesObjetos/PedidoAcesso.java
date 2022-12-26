@@ -5,20 +5,16 @@ public class PedidoAcesso {
     private int cod;
     private String nomeProfessor;
     private int num;
-    private String comentario;
 
-    public PedidoAcesso(int cod, String nomeProfessor, int num, String comentario) {
-        this.cod = cod;
+    public PedidoAcesso(String nomeProfessor, int num) {
         this.nomeProfessor = nomeProfessor;
         this.num = num;
-        this.comentario = comentario;
     }
 
     public PedidoAcesso() {
         this.cod = 0;
         this.nomeProfessor = "";
         this.num = 0;
-        this.comentario = "";
     }
 
     public String getNomeProfessor() {
@@ -29,20 +25,12 @@ public class PedidoAcesso {
         return num;
     }
 
-    public String getComentario() {
-        return comentario;
-    }
-
     public void setNomeProfessor(String nomeProfessor) {
         this.nomeProfessor = nomeProfessor;
     }
 
     public void setNum(int num) {
         this.num = num;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
     }
 
     public int getCod() {

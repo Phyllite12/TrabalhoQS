@@ -7,8 +7,7 @@ public class PedidoMaterial {
     private int quantidade;
     private int codProf;
 
-    public PedidoMaterial(int pedidoCod, int cod, int quantidade, int codProf) {
-        this.pedidoCod = pedidoCod;
+    public PedidoMaterial(int cod, int quantidade, int codProf) {
         this.cod = cod;
         this.quantidade = quantidade;
         this.codProf = codProf;
