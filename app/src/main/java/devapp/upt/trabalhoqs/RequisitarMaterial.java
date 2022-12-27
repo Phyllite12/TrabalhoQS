@@ -46,11 +46,12 @@ public class RequisitarMaterial extends AppCompatActivity {
             Toast.makeText(RequisitarMaterial.this, "quantidade invalida", Toast.LENGTH_SHORT).show();
         }
         else{
-            quantStock = db.GetQuantidade(Integer.parseInt(i.getStringExtra("codMaterial")));
+            quantStock = db.GetQuantidade(Integer.parseInt(i.getStringExtra("cod")));
             if (quant > quantStock){
                 Toast.makeText(RequisitarMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();
             }
             else {
+                db.addPedidosMaterial(new PedidoMaterial(Integer.parseInt(i.getStringExtra("cod")), quant, Integer.parseInt(i.getStringExtra("cod_prof"))));
                 Toast.makeText(RequisitarMaterial.this, "pedido enviado", Toast.LENGTH_SHORT).show();
                 finish();
             }

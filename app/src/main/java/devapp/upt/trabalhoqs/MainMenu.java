@@ -24,6 +24,7 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        db = new DbHandler(this);
         i = getIntent();
         num = Integer.parseInt(i.getStringExtra("num"));
 

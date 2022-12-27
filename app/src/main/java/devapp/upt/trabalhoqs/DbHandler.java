@@ -21,8 +21,6 @@ public class DbHandler extends SQLiteOpenHelper{
     //Nome das tabelas
     public static final String DB_MATERIAL = "Materiais";
     public static final String DB_ACCOUNTS = "Contas";
-    public static final String DB_CONSUMIVEIS = "Consumiveis";
-    public static final String DB_COMPONENTS = "Componentes";
     public static final String DB_PEDIDOS_ACESSO = "PedidosAcesso";
     public static final String DB_PEDIDOS_MATERIAL = "PedidosMaterial";
 
@@ -39,20 +37,6 @@ public class DbHandler extends SQLiteOpenHelper{
     public static final String CPASS = "CPASS";
     public static final String CTIPO = "CTIPO";
     public static final String CPERM = "CPERM";
-
-    //TABLE Consumiveis
-    public static final String CONSCOD = "CONSCOD";
-    public static final String CONSMCOD = "CONSMCOD";
-    public static final String CONSDESCRICAO = "CONSDESCRICAO";
-    public static final String CONSUNIDADES = "CONSUNIDADES";
-    public static final String CONSDISPONIBILIDADE = "CONSDISPONIBILIDADE ";
-
-    //TABLE Componentes
-    public static final String COMSCOD = "COMSCOD";
-    public static final String COMSMCOD = "COMSMCOD";
-    public static final String COMSDESCRICAO = "COMSDESCRICAO";
-    public static final String COMSUNIDADES = "COMSUNIDADES";
-    public static final String COMSDISPONIBILIDADE = "COMSDISPONIBILIDADE ";
 
     //TABLE PedidosAcesso
     public static final String PACOD = "PACOD";
@@ -80,14 +64,10 @@ public class DbHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String queryMateriaisTable = String.format("CREATE TABLE %s( %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER, %s TEXT)", DB_MATERIAL, MCOD, MTIPO, MDESCRICAO, MUNIDADES, MDISPONIBILIDADE);
         String queryContasTable = String.format("CREATE TABLE %s( %s TEXT , %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER)", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, CPERM);
-        String queryConsumiveisTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_CONSUMIVEIS, CONSCOD, CONSMCOD, CONSDESCRICAO, CONSUNIDADES, CONSDISPONIBILIDADE);
-        String queryComponentesTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s TEXT, %s INTEGER, %s TEXT)", DB_COMPONENTS, COMSCOD, COMSMCOD, COMSDESCRICAO, COMSUNIDADES, COMSDISPONIBILIDADE);
         String queryPedidosAcessoTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER)", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM);
-        String queryPedidosMaterialTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, FOREIGN KEY(%s), %s INTEGER, FOREIGN KEY(%s))", DB_PEDIDOS_MATERIAL, PMCOD, PMCODPRODUTO, PMQUANTIDADE, PMCODPROF);
+        String queryPedidosMaterialTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s INTEGER, %s INTEGER, %s INTEGER)", DB_PEDIDOS_MATERIAL, PMCOD, PMCODPRODUTO, PMQUANTIDADE, PMCODPROF);
         sqLiteDatabase.execSQL(queryMateriaisTable);
         sqLiteDatabase.execSQL(queryContasTable);
-        sqLiteDatabase.execSQL(queryConsumiveisTable);
-        sqLiteDatabase.execSQL(queryComponentesTable);
         sqLiteDatabase.execSQL(queryPedidosAcessoTable);
         sqLiteDatabase.execSQL(queryPedidosMaterialTable);
     }
@@ -96,8 +76,6 @@ public class DbHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_MATERIAL);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_ACCOUNTS);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_CONSUMIVEIS);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_COMPONENTS);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_PEDIDOS_ACESSO);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_PEDIDOS_MATERIAL);
         onCreate(sqLiteDatabase);
@@ -144,17 +122,6 @@ public class DbHandler extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
-    public void DeleteConsumiveis(int cod) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("DELETE FROM %s WHERE %s = %s", DB_CONSUMIVEIS, CONSCOD, cod);
-        db.execSQL(query);
-    }
-
-    public void DeleteComponente(int cod) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = String.format("DELETE FROM %s WHERE %s = %s", DB_COMPONENTS, COMSCOD, cod);
-        db.execSQL(query);
-    }
 
     public void DeletePedidoAcesso(int cod) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -318,29 +285,6 @@ public class DbHandler extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
-    public void updateStockConsumivel(int quantidade, int codConsumivel) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_CONSUMIVEIS, CONSUNIDADES, quantidade, CONSCOD, codConsumivel);
-        db.execSQL(query);
-    }
-
-    public void updateDisponibilidadeConsumivel(int disponibilidade, int codConsumivel) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_CONSUMIVEIS, CONSDISPONIBILIDADE, disponibilidade, CONSCOD, codConsumivel);
-        db.execSQL(query);
-    }
-
-    public void updateStockComponente(int quantidade, int codComponente) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_COMPONENTS, COMSDISPONIBILIDADE, quantidade, COMSCOD, codComponente);
-        db.execSQL(query);
-    }
-
-    public void updateDisponibilidadeComponente(int disponibilidade, int codComponente) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_COMPONENTS, COMSUNIDADES, disponibilidade, COMSCOD, codComponente);
-        db.execSQL(query);
-    }
     //Fim Updates
 
 
@@ -366,10 +310,18 @@ public class DbHandler extends SQLiteOpenHelper{
 
 
     public int checkContaTable() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("SELECT * FROM %s", DB_ACCOUNTS);
-        Cursor cursor = db.rawQuery(query, null);
-        return cursor.getCount();
+        SQLiteDatabase db = getWritableDatabase();
+        String count = "SELECT * FROM " + DB_ACCOUNTS;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount>0){
+            return 1;
+        }
+        else{
+            return 2;
+        }
+//populate table
 
     }
 }

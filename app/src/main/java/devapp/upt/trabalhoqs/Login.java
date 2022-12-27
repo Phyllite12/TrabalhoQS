@@ -21,7 +21,6 @@ public class Login extends AppCompatActivity {
     Button btn;
     DbHandler db;
     int perm;
-    int x;
     ArrayList<Conta> contas;
     ArrayList<Material> materiais;
     
@@ -29,24 +28,18 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        db = new DbHandler(this);
         
         number = findViewById(R.id.editTextNum);
         password = findViewById(R.id.editTextpass);
         btn = findViewById(R.id.btnlogin);
 
         insereContas();
-        insereMeteriais();
+        //insereMeteriais();
 
-        x = db.checkContaTable();
+        insereBD();
 
-        if(x == 0){
-            for (int i = 0; i < contas.size(); i++){
-                db.addContas(contas.get(i));
-            }
-            for (int i = 0; i < materiais.size(); i++){
-                db.addMaterial(materiais.get(i));
-            }
-        }
         
         btn.setOnClickListener(this::login);
     }
@@ -74,11 +67,20 @@ public class Login extends AppCompatActivity {
 
     public void insereContas(){
         contas = new ArrayList<>();
-
+        contas.add(new Conta("Marco", 43050, "123asd", "professor", 1));
     }
 
-    public void insereMeteriais(){
-        materiais = new ArrayList<>();
+   //public void insereMeteriais(){
+        //materiais = new ArrayList<>();
+    //}
+
+    public void insereBD(){
+            for (int i = 0; i < contas.size(); i++){
+                db.addContas(contas.get(i));
+            }
+            //for (int i = 0; i < materiais.size(); i++){
+              //db.addMaterial(materiais.get(i));
+            //}
     }
 
 
