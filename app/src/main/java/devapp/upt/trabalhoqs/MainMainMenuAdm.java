@@ -22,13 +22,13 @@ public class MainMainMenuAdm extends AppCompatActivity {
         c10 = findViewById(R.id.c10);
         c11 = findViewById(R.id.c11);
         c12 = findViewById(R.id.c12);
-        c15 = findViewById(R.id.c15);
+        c15 = findViewById(R.id.c13);
 
 
         c10.setOnClickListener(this :: requisicoes);
         c11.setOnClickListener(this :: pedidosAcesso);
         c12.setOnClickListener(this :: Materiais);
-        c15.setOnClickListener(this :: voltar);
+        c13.setOnClickListener(this :: voltar);
     }
 
     private void requisicoes(View view){

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import devapp.upt.trabalhoqs.ClassesObjetos.PedidoMaterial;
 import devapp.upt.trabalhoqs.R;
 import devapp.upt.trabalhoqs.ViewHolders.View_HolderPedidoMaterial;
-import devapp.upt.trabalhoqs.informacao_PedidoMaterial;
+import devapp.upt.trabalhoqs.Informacao_PedidoMaterial;
 
 public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMaterial>  {
 
@@ -54,7 +54,7 @@ public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMate
                         "\n" + String.valueOf(pedidoMaterial.getcodProf()) +
                         "\n" + String.valueOf(pedidoMaterial.getQuantidade());
 
-                Intent intent = new Intent(ct, informacao_PedidoMaterial.class);
+                Intent intent = new Intent(ct, Informacao_PedidoMaterial.class);
                 intent.putExtra("info", info);
                 intent.putExtra("codMaterial", codMaterial);
                 intent.putExtra("codPedido", codPedido);
