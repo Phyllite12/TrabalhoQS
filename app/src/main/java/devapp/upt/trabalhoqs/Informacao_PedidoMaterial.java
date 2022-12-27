@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class informacao_PedidoMaterial extends AppCompatActivity {
+public class Informacao_PedidoMaterial extends AppCompatActivity {
 
     Intent i;
     TextView text;
-    Button aceita, rejeita;
+    Button aceita, rejeita ,btnVolta;
     DbHandler db;
     int quantStock, quant;
 
@@ -27,16 +27,18 @@ public class informacao_PedidoMaterial extends AppCompatActivity {
         text.findViewById(R.id.textViewInfo);
         aceita.findViewById(R.id.Aceitar1);
         rejeita.findViewById(R.id.Rejeitar1);
+        btnVolta.findViewById(R.id.btnvoltar);
 
         text.setText(i.getStringExtra("info"));
 
         aceita.setOnClickListener(this :: aceitar);
         rejeita.setOnClickListener(this :: rejeitar);
+        btnVolta.setOnClickListener(this:: voltar);
     }
 
     private void rejeitar(View view) {
         db.DeletePedidoMaterial(Integer.parseInt(i.getStringExtra("codPedido")));
-        Toast.makeText(informacao_PedidoMaterial.this, "Pedido recusado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Informacao_PedidoMaterial.this, "Pedido recusado", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -49,7 +51,10 @@ public class informacao_PedidoMaterial extends AppCompatActivity {
             finish();
         }
         else{
-            Toast.makeText(informacao_PedidoMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Informacao_PedidoMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void voltar(View view){
+        finish();
     }
 }

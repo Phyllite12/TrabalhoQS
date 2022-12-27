@@ -16,7 +16,7 @@ public class RequisitarMaterial extends AppCompatActivity {
 
     TextView txt;
     EditText edtQuant;
-    Button btn;
+    Button btn, btn2;
     DbHandler db;
     Intent i;
     int quant;
@@ -33,9 +33,11 @@ public class RequisitarMaterial extends AppCompatActivity {
         txt = findViewById(R.id.textViewRequesitarMaterial);
         edtQuant = findViewById(R.id.editTextQuantidade);
         btn = findViewById(R.id.AceitarPedido);
+        btn2 = findViewById(R.id.btnvoltar);
 
         txt.setText(i.getStringExtra("info"));
         btn.setOnClickListener(this :: pedido);
+        btn2.setOnClickListener(this::voltar);
     }
 
     public void pedido(View view){
@@ -54,4 +56,7 @@ public class RequisitarMaterial extends AppCompatActivity {
             }
         }
         }
+    private void voltar(View view){
+        finish();
+    }
 }

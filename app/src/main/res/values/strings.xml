@@ -14,4 +14,8 @@
     <string name="numero">Numero</string>
     <string name="universidade_portucalense">Universidade Portucalense</string>
     <string name="password">Password</string>
+    <string name="requisicoes">Requisições</string>
+    <string name="pedidos_de_acesso">Pedidos de acesso</string>
+    <string name="listar_materais">Listar Materais</string>
+    <string name="pedir_permissao">Pedir Permissão</string>
 </resources>

@@ -14,7 +14,7 @@ import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
 
 public class MainMenu extends AppCompatActivity {
 
-    CardView c1 ,c2 ,c3 ,c4 ,c5 ,c6;
+    CardView c1 ,c2 ,c3;
     Intent i;
     DbHandler db;
     int num;
@@ -29,11 +29,11 @@ public class MainMenu extends AppCompatActivity {
 
         c1 = findViewById(R.id.c1);
         c2 = findViewById(R.id.c2);
-        c6 = findViewById(R.id.c6);
+        c3 = findViewById(R.id.c3);
 
         c1.setOnClickListener(this :: listarMaterais);
         c2.setOnClickListener(this :: pedirPermissao);
-        c6.setOnClickListener(this :: voltar);
+        c3.setOnClickListener(this :: voltar);
     }
 
     private void listarMaterais(View view){

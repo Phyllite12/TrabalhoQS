@@ -15,7 +15,7 @@ public class Informacao_Pedido extends AppCompatActivity {
     DbHandler db;
     int cod;
     TextView textView;
-    Button aceita, rejeita;
+    Button aceita, rejeita ,btnvolta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,14 @@ public class Informacao_Pedido extends AppCompatActivity {
         textView = findViewById(R.id.textViewInformaçaoPedido);
         aceita = findViewById(R.id.Aceitar);
         rejeita = findViewById(R.id.Rejeitar);
+        btnvolta = findViewById(R.id.btnvoltar);
 
         i = getIntent();
         cod = Integer.parseInt(i.getStringExtra("cod"));
 
         aceita.setOnClickListener(this :: aceitarPedido);
         rejeita.setOnClickListener(this :: rejeitarPedido);
+        btnvolta.setOnClickListener(this:: voltar);
     }
 
     public void aceitarPedido(View view){
@@ -42,6 +44,9 @@ public class Informacao_Pedido extends AppCompatActivity {
     public void rejeitarPedido(View view){
         db.DeletePedidoAcesso(cod);
         Toast.makeText(Informacao_Pedido.this, "Pedido rejeitado", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+    private void voltar(View view){
         finish();
     }
 }

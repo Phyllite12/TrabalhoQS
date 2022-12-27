@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TrabalhoQS"
         tools:targetApi="31">
         <activity
-            android:name=".informacao_PedidoMaterial"
+            android:name=".Informacao_PedidoMaterial"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
