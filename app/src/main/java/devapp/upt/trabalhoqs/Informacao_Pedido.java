@@ -17,6 +17,9 @@ public class Informacao_Pedido extends AppCompatActivity {
     TextView textView;
     Button aceita, rejeita ,btnvolta;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +38,24 @@ public class Informacao_Pedido extends AppCompatActivity {
         btnvolta.setOnClickListener(this:: voltar);
     }
 
+    /*
+    Método para aceitar pedido.
+     */
     public void aceitarPedido(View view){
         db.DeletePedidoAcesso(cod);
         Toast.makeText(Informacao_Pedido.this, "pedido aceite", Toast.LENGTH_SHORT).show();
         finish();
     }
 
+    /*
+    Método para rejeitar pedido.
+     */
     public void rejeitarPedido(View view){
         db.DeletePedidoAcesso(cod);
         Toast.makeText(Informacao_Pedido.this, "Pedido rejeitado", Toast.LENGTH_SHORT).show();
         finish();
     }
+
     private void voltar(View view){
         finish();
     }

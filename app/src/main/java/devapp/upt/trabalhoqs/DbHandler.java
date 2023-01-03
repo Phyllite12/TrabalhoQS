@@ -18,48 +18,66 @@ public class DbHandler extends SQLiteOpenHelper{
 
     Context ct;
 
-    //Nome das tabelas
+
+    /*
+    Nome das tabelas.
+     */
     public static final String DB_MATERIAL = "Materiais";
     public static final String DB_ACCOUNTS = "Contas";
     public static final String DB_PEDIDOS_ACESSO = "PedidosAcesso";
     public static final String DB_PEDIDOS_MATERIAL = "PedidosMaterial";
 
-    //TABLE Materiais
+    /*
+    Tabela Materiais.
+    */
     public static final String MCOD = "MCOD";
     public static final String MTIPO = "MTIPO";
     public static final String MDESCRICAO = "MDESCRICAO";
     public static final String MUNIDADES = "MUNIDADES";
     public static final String MDISPONIBILIDADE = "MDISPONIBILIDADE";
 
-    //TABLE Contas
+    /*
+    Tabela Contas.
+    */
     public static final String CNOME = "CNOME";
     public static final String CNUM = "CNUM";
     public static final String CPASS = "CPASS";
     public static final String CTIPO = "CTIPO";
     public static final String CPERM = "CPERM";
 
-    //TABLE PedidosAcesso
+    /*
+    Tabela Pedidos de Acesso.
+    */
     public static final String PACOD = "PACOD";
     public static final String PANOMEPROF = "PANOMEPROF";
     public static final String PANUM = "PANUM";
 
-    //TABLE PedidosMaterial
+    /*
+    Tabela Pedidos de Materiais.
+    */
     public static final String PMCOD = "PMCOD";
     public static final String PMCODPRODUTO = "PMCODPRODUTO";
     public static final String PMQUANTIDADE = "PMQUANTIDADE";
     public static final String PMCODPROF = "PMCODPROF";
 
-    //DATABASE DEFINITIONS
+    /*
+    Definições da Base de Dados.
+    */
     public static final String DBNAME = "mydatabase";
 
     private static final int VERSION = 1;
 
-    //Construtor
+    /*
+    Construtor
+    */
     public DbHandler(@Nullable Context context) {
         super(context, DBNAME, null, VERSION);
         this.ct = context;
     }
 
+    /*
+
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String queryMateriaisTable = String.format("CREATE TABLE %s( %s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s INTEGER, %s TEXT)", DB_MATERIAL, MCOD, MTIPO, MDESCRICAO, MUNIDADES, MDISPONIBILIDADE);
@@ -72,6 +90,9 @@ public class DbHandler extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(queryPedidosMaterialTable);
     }
 
+    /*
+
+     */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DB_MATERIAL);
@@ -81,47 +102,55 @@ public class DbHandler extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
+    /*
+    Início Adds.
 
-
-
-    //Adds
+    Método para adicionar materiais à BD.
+     */
     public void addMaterial(Material material) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = String.format("INSERT INTO %s(%s,%s,%s,%s,%s) VALUES('%s','%s','%s','%s','%s');", DB_MATERIAL, MCOD, MTIPO, MDESCRICAO, MUNIDADES, MDISPONIBILIDADE, material.getCod(), material.getTipo(), material.getDescricao(), material.getnUnidades(), material.isDisponibilidade());
         db.execSQL(query);
     }
 
+    /*
+    Método para adicionar contas à BD.
+     */
     public void addContas(Conta conta) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = String.format("INSERT INTO %s(%s,%s,%s,%s,%s) VALUES('%s','%s','%s','%s','%s');", DB_ACCOUNTS, CNOME, CNUM, CPASS, CTIPO, CPERM, conta.getNome(), conta.getNum(), conta.getPass(), conta.getTipo(), conta.getPerm());
         db.execSQL(query);
     }
 
+    /*
+    Método para adicionar pedidos de acesso à BD.
+     */
     public void addPedidosAcesso(PedidoAcesso pedidoAcesso) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = String.format("INSERT INTO %s(%s,%s,%s) VALUES('%s','%s','%s');", DB_PEDIDOS_ACESSO, PACOD, PANOMEPROF, PANUM, pedidoAcesso.getCod(), pedidoAcesso.getNomeProfessor(), pedidoAcesso.getNum());
         db.execSQL(query);
     }
 
+    /*
+    Método para adicionar pedidos de materiais à BD.
+     */
     public void addPedidosMaterial(PedidoMaterial pedidoMaterial) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = String.format("INSERT INTO %s(%s,%s,%s,%s) VALUES('%s','%s','%s','%s');", DB_PEDIDOS_MATERIAL, PMCOD, PMCODPRODUTO, PMQUANTIDADE, PMCODPROF, pedidoMaterial.getPedidoCod(), pedidoMaterial.getCod(), pedidoMaterial.getQuantidade(), pedidoMaterial.getcodProf());
         db.execSQL(query);
     }
-    //Fim Adds
+    /*
+    Fim Adds.
+     */
 
-
-
-
-
-
-    //Deletes
+    /*
+    Início Deletes.
+     */
     public void DeleteConta(int num) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = String.format("DELETE FROM %s WHERE %s = %s", DB_ACCOUNTS, CNUM, num);
         db.execSQL(query);
     }
-
 
     public void DeletePedidoAcesso(int cod) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -134,15 +163,13 @@ public class DbHandler extends SQLiteOpenHelper{
         String query = String.format("DELETE FROM %s WHERE %s = %s", DB_PEDIDOS_MATERIAL, PMCOD, cod);
         db.execSQL(query);
     }
-    //Fim Deletes
+    /*
+    Fim Deletes.
+     */
 
-
-
-
-
-
-
-    //Listagens
+    /*
+    Início Listagens.
+     */
     public ArrayList<PedidoAcesso> getPedidosDeAcesso() {
         ArrayList<PedidoAcesso> pedidoAcessos = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -241,8 +268,6 @@ public class DbHandler extends SQLiteOpenHelper{
         return m;
     }
 
-
-
     public int GetQuantidade(int codMaterial){
     int m = 0;
     SQLiteDatabase db = this.getReadableDatabase();
@@ -264,15 +289,13 @@ public class DbHandler extends SQLiteOpenHelper{
         }
         return m;
     }
-    //Fim Listagens
+    /*
+    Fim Listagens.
+     */
 
-
-
-
-
-
-
-    //Updates
+    /*
+    Início Updates.
+     */
     public void updateStockMaterial(int quantidade, int codMaterial) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_MATERIAL, MUNIDADES, quantidade, MCOD, codMaterial);
@@ -285,10 +308,13 @@ public class DbHandler extends SQLiteOpenHelper{
         db.execSQL(query);
     }
 
-    //Fim Updates
+    /*
+    Fim Updates.
+     */
 
-
-
+    /*
+    Método para verificar contas na BD.
+     */
     public String authCheck(String nome, String pass) {
         SQLiteDatabase db = getReadableDatabase();
         String queryAl = "SELECT * FROM " + DB_ACCOUNTS ;
@@ -306,12 +332,26 @@ public class DbHandler extends SQLiteOpenHelper{
         return "";
     }
 
-
-
-
     public int checkContaTable() {
         SQLiteDatabase db = getWritableDatabase();
         String count = "SELECT * FROM " + DB_ACCOUNTS;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if (icount > 0) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    //populate table
+
+    /*
+    Método para verificar materiais na BD.
+     */
+    public int checkMaterialTable() {
+        SQLiteDatabase db = getWritableDatabase();
+        String count = "SELECT * FROM " + DB_MATERIAL;
         Cursor mcursor = db.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
@@ -321,7 +361,66 @@ public class DbHandler extends SQLiteOpenHelper{
         else{
             return 2;
         }
-//populate table
+    }
 
+    /*
+    Método para verificar pedidos de acesso na BD.
+     */
+    public int checkPedidosAcessoTable() {
+        SQLiteDatabase db = getWritableDatabase();
+        String count = "SELECT * FROM " + DB_PEDIDOS_ACESSO;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount>0){
+            return 1;
+        }
+        else{
+            return 2;
+        }
+    }
+
+    /*
+    Método para verificar pedidos de materiais na BD.
+     */
+    public int checkPedidosMaterialTable() {
+        SQLiteDatabase db = getWritableDatabase();
+        String count = "SELECT * FROM " + DB_PEDIDOS_MATERIAL;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount>0){
+            return 1;
+        }
+        else{
+            return 2;
+        }
+    }
+
+    /*
+    Método para atualizar permissões na BD.
+     */
+    public void updatePerm(int perm, int codProf) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = String.format("UPDATE * SET %s = %s WHERE %s = %s", DB_ACCOUNTS, CPERM, perm, CNUM, codProf);
+        db.execSQL(query);
+    }
+
+    /*
+    Método para obter contas a partir da BD.
+     */
+    public Conta getConta(int codConta) {
+        Conta m = new Conta();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = String.format("Select * FROM %s WHERE %s = %s", DB_ACCOUNTS, CNUM, codConta);
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            m.setNome(cursor.getString(0));
+            m.setNum(cursor.getInt(1));
+            m.setPass(cursor.getString(2));
+            m.setTipo(cursor.getString(3));
+            m.setPerm(cursor.getInt(4));
+        }
+        return m;
     }
 }

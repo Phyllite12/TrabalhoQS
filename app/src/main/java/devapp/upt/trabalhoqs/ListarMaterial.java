@@ -25,7 +25,9 @@ public class ListarMaterial extends AppCompatActivity {
     ConstraintLayout cl;
     int cod;
 
+    /*
 
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,9 @@ public class ListarMaterial extends AppCompatActivity {
         cl.setOnClickListener(this::onClick);
     }
 
+    /*
+    Método para obter materiais a partir da BD.
+     */
     public void getMaterialBD() {
         listarMaterial = dbHandler.getMaterial();
     }

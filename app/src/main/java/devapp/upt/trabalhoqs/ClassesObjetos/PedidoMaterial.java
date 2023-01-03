@@ -7,12 +7,18 @@ public class PedidoMaterial {
     private int quantidade;
     private int codProf;
 
+    /*
+
+     */
     public PedidoMaterial(int cod, int quantidade, int codProf) {
         this.cod = cod;
         this.quantidade = quantidade;
         this.codProf = codProf;
     }
 
+    /*
+    Inicialização das variàveis.
+     */
     public PedidoMaterial() {
         this.pedidoCod = 0;
         this.cod = 0;
@@ -20,14 +26,23 @@ public class PedidoMaterial {
         this.codProf = 0;
     }
 
+    /*
+    Devolve código do pedido.
+     */
     public int getPedidoCod() {
         return pedidoCod;
     }
 
+    /*
+    Devolve o código.
+     */
     public int getCod() {
         return cod;
     }
 
+    /*
+    Devolve a quantidade de materiais solicitados.
+     */
     public int getQuantidade() {
         return quantidade;
     }
@@ -44,6 +59,9 @@ public class PedidoMaterial {
         this.quantidade = quantidade;
     }
 
+    /*
+    Devolve código do professor que solicitou os materiais.
+     */
     public int getcodProf() {
         return codProf;
     }

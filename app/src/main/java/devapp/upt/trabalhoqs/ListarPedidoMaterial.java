@@ -24,6 +24,9 @@ public class ListarPedidoMaterial extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     ConstraintLayout cl;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +48,14 @@ public class ListarPedidoMaterial extends AppCompatActivity {
         cl.setOnClickListener(this::onClick);
     }
 
+    /*
+    Método para obter pedidos de materiais a partir da BD.
+     */
     private void getPedidoMaterialBD() {
         listarPedidoMaterial = dbHandler.getPedidosDeMaterial();
     }
 
-
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         finish();
     }
 }

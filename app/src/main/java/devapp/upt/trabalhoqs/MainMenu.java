@@ -20,6 +20,9 @@ public class MainMenu extends AppCompatActivity {
     int num;
     int perm;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,9 @@ public class MainMenu extends AppCompatActivity {
         c3.setOnClickListener(this :: voltar);
     }
 
+    /*
+    Método para listar materiais.
+     */
     private void listarMaterais(View view){
         perm = db.GetPerm(num);
         if (perm == 1){
@@ -49,6 +55,9 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
+    /*
+    Método para solicitar permissão.
+     */
     private void pedirPermissao(View view){
         perm = db.GetPerm(num);
         if (perm == 2){

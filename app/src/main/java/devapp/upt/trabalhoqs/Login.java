@@ -23,7 +23,10 @@ public class Login extends AppCompatActivity {
     int perm;
     ArrayList<Conta> contas;
     ArrayList<Material> materiais;
-    
+
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +39,18 @@ public class Login extends AppCompatActivity {
         btn = findViewById(R.id.btnlogin);
 
         insereContas();
-        //insereMeteriais();
+        insereMateriais();
 
-        insereBD();
-
+        if(db.checkContaTable() == 2) {
+            insereBD();
+        }
         
         btn.setOnClickListener(this::login);
     }
 
+    /*
+    Método para efetuar login.
+     */
     private void login(View view) {
         perm = db.GetPerm(Integer.parseInt(num));
         num = number.getText().toString();
@@ -51,7 +58,7 @@ public class Login extends AppCompatActivity {
         String check = db.authCheck(num, pass);
         if (!check.equals("")) {
             if (perm == 3){
-                Intent i = new Intent(this, MainMainMenuAdm.class);
+                Intent i = new Intent(this, MainMenuAdm.class);
                 startActivity(i);
             }
             else{
@@ -65,25 +72,38 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    /*
+    Método para inserir conta.
+     */
     public void insereContas(){
         contas = new ArrayList<>();
         contas.add(new Conta("Marco", 43050, "123asd", "professor", 1));
     }
 
-   //public void insereMeteriais(){
-        //materiais = new ArrayList<>();
-    //}
+    /*
+    Método para inserir materiais.
+     */
+   public void insereMateriais(){
+        materiais = new ArrayList<>();
+    }
 
+    /*
+    Método para inserir dados na BD.
+     */
     public void insereBD(){
             for (int i = 0; i < contas.size(); i++){
                 db.addContas(contas.get(i));
             }
-            //for (int i = 0; i < materiais.size(); i++){
-              //db.addMaterial(materiais.get(i));
-            //}
+            for (int i = 0; i < materiais.size(); i++){
+              db.addMaterial(materiais.get(i));
+            }
     }
 
+    public int getAllContas(){
+        return contas.size();
+    }
 
-
-
+    public int getAllMateriais(){
+        return materiais.size();
+    }
 }

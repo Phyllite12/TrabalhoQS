@@ -30,22 +30,27 @@ public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMate
         this.ct = ct;
     }
 
+    /*
+    Este método define os atributos que, posteriormente, irão ser mostrados no ecrã.
+     */
     @NonNull
     @Override
     public View_HolderPedidoMaterial onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_pedidomaterial,parent,false);
-
         myVPedMat = new View_HolderPedidoMaterial(v);
         return myVPedMat;
     }
 
+    /*
+    Este método devolve, ao utilizador, os pedidos de materiais efetuados por Professor.
+     */
     @Override
     public void onBindViewHolder(@NonNull View_HolderPedidoMaterial holder, int position) {
         PedidoMaterial pedidoMaterial = pedMaterial.get(position);
         myVPedMat.pedMatTv.setText(pedMaterial.get(position).getPedidoCod());
         myVPedMat.pedMatTv.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 codMaterial = String.valueOf(pedidoMaterial.getCod());
@@ -63,15 +68,19 @@ public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMate
         });
 
     }
-
+    /*
+    Devolve a quantidade de pedidos de materiais.
+     */
     @Override
     public int getItemCount() {
         return pedMaterial.size();
     }
+
+    /*
+    Devolve a posição do item.
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 }
-
-

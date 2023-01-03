@@ -22,7 +22,9 @@ public class RequisitarMaterial extends AppCompatActivity {
     int quant;
     int quantStock;
 
+    /*
 
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class RequisitarMaterial extends AppCompatActivity {
         btn2.setOnClickListener(this::voltar);
     }
 
+    /*
+    Método pedido de requisição de materiais.
+     */
     public void pedido(View view){
         quant = Integer.parseInt(edtQuant.getText().toString());
         if (quant <= 0 && quant != (int)quant){
@@ -56,7 +61,8 @@ public class RequisitarMaterial extends AppCompatActivity {
                 finish();
             }
         }
-        }
+    }
+
     private void voltar(View view){
         finish();
     }

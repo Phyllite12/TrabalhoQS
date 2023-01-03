@@ -30,18 +30,21 @@ public class AdapterPedido extends RecyclerView.Adapter<View_HolderPedido>{
         this.ct = ct;
     }
 
+    /*
+    Este método define os atributos que, posteriormente, irão ser mostrados no ecrã.
+     */
     @NonNull
     @Override
     public View_HolderPedido onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_pedido,parent,false);
-
-
         myVPed = new View_HolderPedido(v);
         return myVPed;
     }
 
+    /*
+    Este método devolve, ao utilizador, os pedidos efetuados por Professor.
+     */
     @Override
     public void onBindViewHolder(@NonNull View_HolderPedido holder, int position) {
         PedidoAcesso pedidoAcesso = pedido.get(position);
@@ -62,14 +65,19 @@ public class AdapterPedido extends RecyclerView.Adapter<View_HolderPedido>{
         });
     }
 
+    /*
+    Devolve a quantidade de pedidos.
+     */
     @Override
     public int getItemCount() {
         return pedido.size();
     }
 
+    /*
+    Devolve a posição do item.
+     */
     @Override
     public int getItemViewType(int position) {
         return position;
     }
 }
-
