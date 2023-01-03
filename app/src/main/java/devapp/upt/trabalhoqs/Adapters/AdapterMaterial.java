@@ -26,25 +26,27 @@ public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
     int cod_material;
     int cod_prof;
 
-
     public AdapterMaterial(ArrayList<Material> material, Context ct, int cod_prof) {
         this.materiais = material;
         this.ct = ct;
         this.cod_prof = cod_prof;
     }
 
+    /*
+    Este método define os atributos que, posteriormente, irão ser mostrados no ecrã.
+     */
     @NonNull
     @Override
     public View_HolderMaterial onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_view_material,parent,false);
-
-
         myVMat = new View_HolderMaterial(v);
         return myVMat;
     }
 
+    /*
+    Este método devolve, ao utilizador, a lista dos materiais.
+     */
     @Override
     public void onBindViewHolder(@NonNull View_HolderMaterial holder, int position) {
         Material material = materiais.get(position);
@@ -57,8 +59,6 @@ public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
                         "\n" + material.getTipo() +
                         "\n" + String.valueOf(material.getnUnidades()) +
                         "\n" + material.isDisponibilidade();
-
-
                 Intent intent = new Intent(ct, RequisitarMaterial.class);
                 intent.putExtra("info", info);
                 intent.putExtra("cod", cod_material);
@@ -66,15 +66,19 @@ public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
                 ct.startActivity(intent);
             }
         });
-
-
     }
 
+    /*
+    Devolve a quantidade de materiais.
+     */
     @Override
     public int getItemCount() {
         return materiais.size();
     }
 
+    /*
+    Devolve a posição do item.
+     */
     @Override
     public int getItemViewType(int position) {
         return position;

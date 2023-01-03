@@ -11,16 +11,25 @@ public class PedidoAcesso {
         this.num = num;
     }
 
+    /*
+    Incialização das variàveis.
+     */
     public PedidoAcesso() {
         this.cod = 0;
         this.nomeProfessor = "";
         this.num = 0;
     }
 
+    /*
+    Devolve o nome do professor que solicitou o pedido de acesso ao laboratório.
+     */
     public String getNomeProfessor() {
         return nomeProfessor;
     }
 
+    /*
+    Devolve número do pedido de acesso.
+     */
     public int getNum() {
         return num;
     }
@@ -33,6 +42,9 @@ public class PedidoAcesso {
         this.num = num;
     }
 
+    /*
+    Devolve código do pedido de acesso.
+     */
     public int getCod() {
         return cod;
     }

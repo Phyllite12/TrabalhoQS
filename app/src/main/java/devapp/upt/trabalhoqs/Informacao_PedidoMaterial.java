@@ -17,6 +17,9 @@ public class Informacao_PedidoMaterial extends AppCompatActivity {
     DbHandler db;
     int quantStock, quant;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +39,18 @@ public class Informacao_PedidoMaterial extends AppCompatActivity {
         btnVolta.setOnClickListener(this:: voltar);
     }
 
+    /*
+    Método para rejeitar pedido de material.
+     */
     private void rejeitar(View view) {
         db.DeletePedidoMaterial(Integer.parseInt(i.getStringExtra("codPedido")));
         Toast.makeText(Informacao_PedidoMaterial.this, "Pedido recusado", Toast.LENGTH_SHORT).show();
         finish();
     }
 
+    /*
+    Método para aceitar pedido de material.
+     */
     private void aceitar(View view) {
         quantStock = db.GetQuantidade(Integer.parseInt(i.getStringExtra("codMaterial")));
         if (quant <= quantStock) {
@@ -54,6 +63,7 @@ public class Informacao_PedidoMaterial extends AppCompatActivity {
             Toast.makeText(Informacao_PedidoMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void voltar(View view){
         finish();
     }

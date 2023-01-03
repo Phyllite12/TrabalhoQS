@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainMainMenuAdm extends AppCompatActivity {
+public class MainMenuAdm extends AppCompatActivity {
 
     CardView c10,c11 ,c12 ,c13 ,c14 ,c15;
     Intent i;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +34,26 @@ public class MainMainMenuAdm extends AppCompatActivity {
         c13.setOnClickListener(this :: voltar);
     }
 
+    /*
+    Método para listar requisições de pedidos de materiais.
+     */
     private void requisicoes(View view){
         i = new Intent(this,ListarPedidoMaterial.class);
         startActivity(i);
         ;
     }
 
+    /*
+    Método para listar pedidos de acesso.
+     */
     private void pedidosAcesso(View view){
-        i = new Intent(this,ListaPedido.class);
+        i = new Intent(this, ListarPedido.class);
         startActivity(i);
     }
 
+    /*
+    Método para listar materiais.
+     */
     private void Materiais(View view){
         i = new Intent(this,ListarMaterial.class);
         startActivity(i);

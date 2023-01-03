@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import devapp.upt.trabalhoqs.Adapters.AdapterPedido;
 import devapp.upt.trabalhoqs.ClassesObjetos.PedidoAcesso;
 
-public class ListaPedido extends AppCompatActivity {
+public class ListarPedido extends AppCompatActivity {
 
     DbHandler dbHandler;
     Intent i;
@@ -24,6 +24,9 @@ public class ListaPedido extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     ConstraintLayout cl;
 
+    /*
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +48,14 @@ public class ListaPedido extends AppCompatActivity {
         cl.setOnClickListener(this::onClick);
     }
 
+    /*
+    Método para obter pedidos de acesso a partir da BD.
+     */
     private void getPedidoAcessoBD() {
         listarPedido = dbHandler.getPedidosDeAcesso();
     }
 
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         finish();
     }
 
