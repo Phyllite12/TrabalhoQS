@@ -25,6 +25,8 @@ public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
     String info;
     int cod_material;
     int cod_prof;
+    String cod_material1;
+    String cod_prof1;
 
     public AdapterMaterial(ArrayList<Material> material, Context ct, int cod_prof) {
         this.materiais = material;
@@ -55,14 +57,16 @@ public class AdapterMaterial extends RecyclerView.Adapter<View_HolderMaterial> {
             @Override
             public void onClick(View view) {
                 cod_material = material.getCod();
+                cod_material1 = String.valueOf(cod_material);
+                cod_prof1 = String.valueOf(cod_prof);
                 info = material.getDescricao() +
                         "\n" + material.getTipo() +
                         "\n" + String.valueOf(material.getnUnidades()) +
                         "\n" + material.isDisponibilidade();
                 Intent intent = new Intent(ct, RequisitarMaterial.class);
                 intent.putExtra("info", info);
-                intent.putExtra("cod", cod_material);
-                intent.putExtra("cod_prof", cod_prof);
+                intent.putExtra("cod", cod_material1);
+                intent.putExtra("cod_prof", cod_prof1);
                 ct.startActivity(intent);
             }
         });

@@ -48,7 +48,7 @@ public class AdapterPedidoMat extends RecyclerView.Adapter<View_HolderPedidoMate
     @Override
     public void onBindViewHolder(@NonNull View_HolderPedidoMaterial holder, int position) {
         PedidoMaterial pedidoMaterial = pedMaterial.get(position);
-        myVPedMat.pedMatTv.setText(pedMaterial.get(position).getPedidoCod());
+        myVPedMat.pedMatTv.setText(String.valueOf(pedMaterial.get(position).getPedidoCod()));
         myVPedMat.pedMatTv.setOnClickListener(new View.OnClickListener() {
 
             @Override

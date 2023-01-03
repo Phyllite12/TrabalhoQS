@@ -24,14 +24,12 @@ public class MainMenuAdm extends AppCompatActivity {
 
         c10 = findViewById(R.id.c10);
         c11 = findViewById(R.id.c11);
-        c12 = findViewById(R.id.c12);
         c15 = findViewById(R.id.c13);
 
 
         c10.setOnClickListener(this :: requisicoes);
         c11.setOnClickListener(this :: pedidosAcesso);
-        c12.setOnClickListener(this :: Materiais);
-        c13.setOnClickListener(this :: voltar);
+        c15.setOnClickListener(this :: voltar);
     }
 
     /*
@@ -48,14 +46,6 @@ public class MainMenuAdm extends AppCompatActivity {
      */
     private void pedidosAcesso(View view){
         i = new Intent(this, ListarPedido.class);
-        startActivity(i);
-    }
-
-    /*
-    Método para listar materiais.
-     */
-    private void Materiais(View view){
-        i = new Intent(this,ListarMaterial.class);
         startActivity(i);
     }
 

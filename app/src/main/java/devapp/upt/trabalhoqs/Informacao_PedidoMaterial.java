@@ -24,13 +24,13 @@ public class Informacao_PedidoMaterial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacao_pedido_material);
-
+        db = new DbHandler(this);
         i = getIntent();
 
-        text.findViewById(R.id.textViewInfo);
-        aceita.findViewById(R.id.Aceitar1);
-        rejeita.findViewById(R.id.Rejeitar1);
-        btnVolta.findViewById(R.id.btnvoltar);
+        text = findViewById(R.id.textViewInfoPedidoMaterial);
+        aceita = findViewById(R.id.Aceitar1);
+        rejeita = findViewById(R.id.Rejeitar1);
+        btnVolta = findViewById(R.id.btnvoltar);
 
         text.setText(i.getStringExtra("info"));
 
@@ -57,7 +57,6 @@ public class Informacao_PedidoMaterial extends AppCompatActivity {
             int diferenca = quantStock - quant;
             db.updateStockMaterial(diferenca, Integer.parseInt(i.getStringExtra("codMaterial")));
             db.DeletePedidoMaterial(Integer.parseInt(i.getStringExtra("codPedido")));
-            finish();
         }
         else{
             Toast.makeText(Informacao_PedidoMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();

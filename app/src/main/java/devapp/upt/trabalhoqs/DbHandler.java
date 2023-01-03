@@ -65,7 +65,7 @@ public class DbHandler extends SQLiteOpenHelper{
     */
     public static final String DBNAME = "mydatabase";
 
-    private static final int VERSION = 1;
+    private static final int VERSION = 3;
 
     /*
     Construtor
@@ -279,13 +279,13 @@ public class DbHandler extends SQLiteOpenHelper{
         return m;
     }
 
-    public int GetPerm(int codMaterial){
+    public int GetPerm(int codProfessor){
         int m = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = String.format("Select * FROM %s WHERE %s = %s", DB_MATERIAL, MCOD, codMaterial);
+        String query = String.format("Select * FROM %s WHERE %s = %s", DB_ACCOUNTS, CNUM, codProfessor);
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
-                m = (cursor.getInt(3));
+            m = (cursor.getInt(4));
         }
         return m;
     }
@@ -315,7 +315,7 @@ public class DbHandler extends SQLiteOpenHelper{
     /*
     Método para verificar contas na BD.
      */
-    public String authCheck(String nome, String pass) {
+    public String authCheck(String num, String pass) {
         SQLiteDatabase db = getReadableDatabase();
         String queryAl = "SELECT * FROM " + DB_ACCOUNTS ;
         Cursor c = null;
@@ -324,8 +324,8 @@ public class DbHandler extends SQLiteOpenHelper{
         }
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
-                if (nome.equalsIgnoreCase(String.valueOf(c.getInt(1))) && pass.equalsIgnoreCase(String.valueOf(c.getInt(2)))) {
-                    return String.valueOf(c.getInt(2));
+                if (num.equalsIgnoreCase((c.getString(1))) && pass.equalsIgnoreCase(c.getString(2))) {
+                    return String.valueOf(c.getInt(1));
                 }
             }
         }
