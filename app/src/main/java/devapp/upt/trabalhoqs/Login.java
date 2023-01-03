@@ -41,10 +41,6 @@ public class Login extends AppCompatActivity {
         insereContas();
         insereMateriais();
 
-        if(db.checkContaTable() == 2) {
-            insereBD();
-        }
-        
         btn.setOnClickListener(this::login);
     }
 
@@ -52,9 +48,9 @@ public class Login extends AppCompatActivity {
     Método para efetuar login.
      */
     private void login(View view) {
-        perm = db.GetPerm(Integer.parseInt(num));
         num = number.getText().toString();
         pass = password.getText().toString();
+        perm = db.GetPerm(Integer.parseInt(num));
         String check = db.authCheck(num, pass);
         if (!check.equals("")) {
             if (perm == 3){
@@ -78,6 +74,8 @@ public class Login extends AppCompatActivity {
     public void insereContas(){
         contas = new ArrayList<>();
         contas.add(new Conta("Marco", 43050, "123asd", "professor", 1));
+        contas.add(new Conta("José", 57841, "123asd", "professor", 2));
+        contas.add(new Conta("António", 45862, "123asd", "admin", 3));
     }
 
     /*
@@ -85,6 +83,8 @@ public class Login extends AppCompatActivity {
      */
    public void insereMateriais(){
         materiais = new ArrayList<>();
+        materiais.add(new Material(24343, "drone", "drone", 10, "disponivel"));
+        materiais.add(new Material(25489, "carro", "carro tele comandado", 15, "disponivel"));
     }
 
     /*

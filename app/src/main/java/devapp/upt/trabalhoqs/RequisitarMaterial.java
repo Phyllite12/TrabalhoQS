@@ -29,7 +29,7 @@ public class RequisitarMaterial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requisitar_material);
-
+        db = new DbHandler(this);
         i = getIntent();
 
         txt = findViewById(R.id.textViewRequesitarMaterial);
@@ -54,6 +54,7 @@ public class RequisitarMaterial extends AppCompatActivity {
             quantStock = db.GetQuantidade(Integer.parseInt(i.getStringExtra("cod")));
             if (quant > quantStock){
                 Toast.makeText(RequisitarMaterial.this, "Stock insuficiente", Toast.LENGTH_SHORT).show();
+                finish();
             }
             else {
                 db.addPedidosMaterial(new PedidoMaterial(Integer.parseInt(i.getStringExtra("cod")), quant, Integer.parseInt(i.getStringExtra("cod_prof"))));

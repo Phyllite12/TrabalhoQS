@@ -24,7 +24,7 @@ public class Informacao_Pedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacao_pedido);
-
+        db = new DbHandler(this);
         textView = findViewById(R.id.textViewInformaçaoPedido);
         aceita = findViewById(R.id.Aceitar);
         rejeita = findViewById(R.id.Rejeitar);

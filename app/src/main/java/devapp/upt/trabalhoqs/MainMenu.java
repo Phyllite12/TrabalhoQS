@@ -19,6 +19,7 @@ public class MainMenu extends AppCompatActivity {
     DbHandler db;
     int num;
     int perm;
+    String num1;
 
     /*
 
@@ -30,6 +31,7 @@ public class MainMenu extends AppCompatActivity {
         db = new DbHandler(this);
         i = getIntent();
         num = Integer.parseInt(i.getStringExtra("num"));
+        num1 = String.valueOf(num);
 
         c1 = findViewById(R.id.c1);
         c2 = findViewById(R.id.c2);
@@ -50,7 +52,8 @@ public class MainMenu extends AppCompatActivity {
         }
         else {
             i = new Intent(this, ListarMaterial.class);
-            i.putExtra("cod", num);
+
+            i.putExtra("cod", num1);
             startActivity(i);
         }
     }
